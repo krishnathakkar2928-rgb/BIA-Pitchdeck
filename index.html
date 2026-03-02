@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greektown BIA — Content Strategy</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #0D2240; --blue: #1A3A6B; --gold: #C8902A; --gold-light: #E8B84B;
+  --cream: #FAF6EE; --warm: #F2EBD9; --text: #1A1A2E; --muted: #7A7060;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: #1A1A2E; color: var(--text); overflow-x: hidden; }
+
+.nav { position: fixed; right: 24px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 10px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: all .3s; border: none; }
+.nav-dot.active, .nav-dot:hover { background: var(--gold-light); transform: scale(1.4); }
+
+.slide { width: 100%; min-height: 100vh; position: relative; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+
+/* SLIDE 1 */
+#slide1 { background: var(--navy); align-items: center; text-align: center; }
+.hero-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(200,144,42,0.05) 60px,rgba(200,144,42,0.05) 61px), repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(200,144,42,0.05) 60px,rgba(200,144,42,0.05) 61px); }
+.hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle,rgba(200,144,42,0.12) 0%,transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.hero-content { position: relative; z-index: 2; max-width: 900px; padding: 60px 40px; animation: fadeUp .9s ease both; }
+.hero-logo { margin: 0 auto 32px; display: block; max-width: 320px; filter: brightness(0) invert(1); }
+.hero-tag { display: inline-block; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; padding: 8px 20px; margin-bottom: 28px; }
+.hero-title { font-family: var(--serif); font-size: clamp(44px,8vw,84px); font-weight: 700; color: #fff; line-height: 1.05; margin-bottom: 18px; }
+.hero-title em { color: var(--gold-light); font-style: italic; }
+.hero-sub { font-size: clamp(14px,1.8vw,17px); color: rgba(255,255,255,0.55); margin-bottom: 44px; line-height: 1.6; }
+.hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.pill { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.8); padding: 9px 20px; border-radius: 100px; font-size: 13px; font-weight: 500; }
+.hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; animation: bounce 2s infinite; z-index: 2; }
+
+/* SLIDE 2 */
+#slide2 { background: var(--cream); }
+.brand-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+.brand-left { background: var(--blue); padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.brand-left::after { content: 'Ω'; position: absolute; bottom: -40px; right: -10px; font-family: var(--serif); font-size: 280px; color: rgba(255,255,255,0.04); line-height: 1; }
+.brand-right { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+.section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px; }
+.section-title { font-family: var(--serif); font-size: clamp(32px,4.5vw,52px); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 28px; }
+.brand-right .section-eyebrow { color: var(--gold); }
+.brand-right .section-title { color: var(--navy); }
+.voice-items { display: flex; flex-direction: column; gap: 16px; }
+.voice-item { display: flex; align-items: flex-start; gap: 14px; }
+.voice-icon { width: 42px; height: 42px; background: rgba(200,144,42,0.18); border: 1px solid rgba(200,144,42,0.35); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.voice-text h4 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+.voice-text p { font-size: 12.5px; color: rgba(255,255,255,0.52); line-height: 1.5; }
+.pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.pillar-card { background: #fff; border-radius: 14px; padding: 18px; border-top: 3px solid var(--gold); box-shadow: 0 3px 16px rgba(0,0,0,0.07); transition: transform .2s; }
+.pillar-card:hover { transform: translateY(-3px); }
+.pillar-emoji { font-size: 22px; margin-bottom: 8px; }
+.pillar-card h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.pillar-card p { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+/* SLIDE 3 */
+#slide3 { background: var(--navy); padding: 80px 50px; }
+.s3-header { text-align: center; margin-bottom: 52px; }
+.s3-header .section-eyebrow { color: var(--gold); }
+.s3-header .section-title { color: #fff; font-size: clamp(34px,5vw,58px); }
+.s3-header p { color: rgba(255,255,255,0.45); font-size: 15px; margin-top: 10px; }
+.pillars-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; max-width: 1200px; margin: 0 auto; }
+.big-pillar { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; transition: transform .3s, border-color .3s; }
+.big-pillar:hover { transform: translateY(-6px); border-color: var(--gold); }
+.pillar-banner { height: 180px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.pillar-banner img.banner-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.pillar-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(13,34,64,0.85) 100%); z-index: 1; }
+.pillar-banner-icon { font-size: 52px; position: relative; z-index: 2; }
+.pillar-banner-label { position: absolute; bottom: 12px; left: 14px; z-index: 2; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+.pb-reels  { background: linear-gradient(135deg,#3D0C6B,#8E44AD,#C0392B); }
+.pb-food   { background: linear-gradient(135deg,#7D3000,#C8902A,#F39C12); }
+.pb-events { background: linear-gradient(135deg,#0D4F6C,#1A7DA8,#16A085); }
+.pb-biz    { background: linear-gradient(135deg,#0D2240,#1A3A6B,#2471A3); }
+.pillar-body { padding: 18px; }
+.pillar-body h3 { font-family: var(--serif); font-size: 21px; font-weight: 700; color: #fff; margin-bottom: 7px; }
+.pillar-body p { font-size: 12px; color: rgba(255,255,255,0.48); line-height: 1.6; margin-bottom: 12px; }
+.pillar-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ptag { background: rgba(200,144,42,0.14); border: 1px solid rgba(200,144,42,0.3); color: var(--gold-light); font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 100px; }
+
+/* SLIDE 4 */
+#slide4 { background: var(--warm); padding: 70px 44px; }
+.cal-header { text-align: center; margin-bottom: 44px; }
+.cal-header .section-eyebrow { color: var(--gold); }
+.cal-header .section-title { color: var(--navy); font-size: clamp(32px,4.5vw,52px); }
+.week-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 9px; max-width: 1200px; margin: 0 auto 32px; }
+.day-header { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: 9px 0; margin-bottom: 7px; border-bottom: 2px solid var(--gold); }
+.day-card { background: #fff; border-radius: 11px; padding: 13px 11px; min-height: 105px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border-left: 3px solid transparent; margin-bottom: 9px; transition: transform .2s; }
+.day-card:hover { transform: scale(1.02); }
+.day-card.event  { border-left-color: #E74C3C; }
+.day-card.reel   { border-left-color: #8E44AD; }
+.day-card.feature{ border-left-color: var(--gold); }
+.day-card.story  { border-left-color: #27AE60; }
+.day-card.ugc    { border-left-color: #2980B9; }
+.day-card.off    { background: rgba(0,0,0,0.03); border-left-color: transparent; min-height: 55px; }
+.card-type { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+.card-type.event  { color: #E74C3C; }
+.card-type.reel   { color: #8E44AD; }
+.card-type.feature{ color: var(--gold); }
+.card-type.story  { color: #27AE60; }
+.card-type.ugc    { color: #2980B9; }
+.day-card h5 { font-size: 11.5px; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 4px; }
+.day-card p  { font-size: 10px; color: var(--muted); line-height: 1.4; }
+.legend { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); font-weight: 500; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* SLIDE 5 */
+#slide5 { background: var(--blue); padding: 80px 60px; }
+.s5-header { text-align: center; margin-bottom: 56px; }
+.s5-header .section-eyebrow { color: var(--gold-light); }
+.s5-header .section-title { color: #fff; font-size: clamp(32px,4.5vw,52px); }
+.campaigns-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; max-width: 1200px; margin: 0 auto; }
+.campaign-card { border-radius: 20px; overflow: hidden; position: relative; min-height: 400px; display: flex; flex-direction: column; justify-content: flex-end; transition: transform .3s; }
+.campaign-card:hover { transform: scale(1.02); }
+.campaign-card img.cc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cc-spring { background: linear-gradient(135deg,#1a4a1a,#2E7D32,#66BB6A); }
+.cc-spot   { background: linear-gradient(135deg,#0D2240,#1565C0,#42A5F5); }
+.cc-summer { background: linear-gradient(135deg,#7D3000,#E65100,#FFB300); }
+.cc-gems   { background: linear-gradient(135deg,#1a0a2e,#4a1080,#7b2d8b); }
+.cc-week   { background: linear-gradient(135deg,#0a2a1a,#1b6b3a,#2ecc71); }
+.cc-deco { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.07); }
+.campaign-overlay { position: absolute; inset: 0; background: linear-gradient(to top,rgba(13,34,64,0.96) 0%,rgba(13,34,64,0.5) 55%,transparent 100%); z-index: 1; }
+.campaign-content { position: relative; z-index: 2; padding: 26px; }
+.campaign-badge { display: inline-block; background: var(--gold); color: #fff; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 11px; }
+.campaign-content h3 { font-family: var(--serif); font-size: 25px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 9px; }
+.campaign-content p { font-size: 12px; color: rgba(255,255,255,0.62); line-height: 1.6; margin-bottom: 13px; }
+.campaign-meta { display: flex; gap: 14px; flex-wrap: wrap; }
+.cmeta { font-size: 10px; color: var(--gold-light); font-weight: 600; }
+
+/* SLIDE 6 */
+#slide6 { background: var(--cream); padding: 80px 60px; }
+.tl-header { text-align: center; margin-bottom: 56px; }
+.tl-header .section-eyebrow { color: var(--gold); }
+.tl-header .section-title { color: var(--navy); font-size: clamp(32px,4.5vw,52px); }
+.timeline { max-width: 1100px; margin: 0 auto; position: relative; }
+.tl-bar { position: absolute; top: 54px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold)); border-radius: 3px; }
+.timeline-phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+.tphase { text-align: center; }
+.tphase-dot { width: 50px; height: 50px; border-radius: 50%; margin: 30px auto 26px; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 20px; font-weight: 700; color: #fff; position: relative; z-index: 2; box-shadow: 0 0 0 6px var(--cream), 0 0 0 8px var(--gold); }
+.tphase:nth-child(1) .tphase-dot { background: #1A3A6B; }
+.tphase:nth-child(2) .tphase-dot { background: #C8902A; }
+.tphase:nth-child(3) .tphase-dot { background: #0D2240; }
+.tphase-range { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.tphase h3 { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 18px; }
+.tphase-items { display: flex; flex-direction: column; gap: 9px; }
+.titem { background: #fff; border-radius: 10px; padding: 13px 15px; text-align: left; display: flex; align-items: flex-start; gap: 9px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.titem-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.titem p { font-size: 12px; color: var(--text); line-height: 1.5; }
+.titem strong { font-weight: 600; color: var(--navy); }
+
+/* SLIDE 7 */
+#slide7 { background: var(--navy); padding: 80px 60px; }
+.m-header { text-align: center; margin-bottom: 56px; }
+.m-header .section-eyebrow { color: var(--gold); }
+.m-header .section-title { color: #fff; font-size: clamp(32px,4.5vw,52px); }
+.metrics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1100px; margin: 0 auto 40px; }
+.metric-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 34px 26px; text-align: center; transition: border-color .3s, transform .3s; position: relative; overflow: hidden; }
+.metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+.metric-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.metric-icon { font-size: 34px; margin-bottom: 14px; }
+.metric-number { font-family: var(--serif); font-size: 40px; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 4px; }
+.metric-label { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 7px; }
+.metric-desc { font-size: 11px; color: rgba(255,255,255,0.42); line-height: 1.5; }
+.tools-row { max-width: 1100px; margin: 0 auto; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px 32px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.tools-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+.tool-badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.11); color: rgba(255,255,255,0.72); padding: 7px 16px; border-radius: 100px; font-size: 12px; font-weight: 500; }
+
+/* SLIDE 8 */
+#slide8 { background: var(--navy); align-items: center; text-align: center; }
+.close-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle,rgba(200,144,42,0.1) 0%,transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.close-content { position: relative; z-index: 2; max-width: 800px; padding: 60px 40px; }
+.close-orn { font-family: var(--serif); font-size: 76px; color: var(--gold); line-height: 1; margin-bottom: 18px; opacity: .65; }
+.close-title { font-family: var(--serif); font-size: clamp(38px,7vw,70px); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 18px; }
+.close-title em { color: var(--gold-light); font-style: italic; }
+.close-sub { font-size: 16px; color: rgba(255,255,255,0.52); line-height: 1.7; margin-bottom: 44px; max-width: 580px; margin-left: auto; margin-right: auto; }
+.close-cta { display: inline-block; background: var(--gold); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 17px 42px; border-radius: 4px; cursor: pointer; border: none; transition: background .2s, transform .2s; }
+.close-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+.reveal { opacity:0; transform:translateY(36px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-parent .reveal:nth-child(1){transition-delay:.05s}
+.reveal-parent .reveal:nth-child(2){transition-delay:.15s}
+.reveal-parent .reveal:nth-child(3){transition-delay:.25s}
+.reveal-parent .reveal:nth-child(4){transition-delay:.35s}
+.reveal-parent .reveal:nth-child(5){transition-delay:.45s}
+.reveal-parent .reveal:nth-child(6){transition-delay:.55s}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <button class="nav-dot active" onclick="document.getElementById('slide1').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide2').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide3').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide4').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide5').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide6').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide7').scrollIntoView({behavior:'smooth'})"></button>
+  <button class="nav-dot" onclick="document.getElementById('slide8').scrollIntoView({behavior:'smooth'})"></button>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 1: HERO
+     IMAGE TO REPLACE: logo
+     Change the src below to your logo file, e.g. src="logo.png"
+════════════════════════════════════════ -->
+<section class="slide" id="slide1">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <!-- ▼▼▼ REPLACE src WITH YOUR LOGO FILE e.g. src="greektown-logo.png" ▼▼▼ -->
+    <img class="hero-logo" src="logo.svg" alt="Greektown on the Danforth" />
+    <!-- ▲▲▲ -->
+    <div class="hero-tag">Content Strategy Presentation · 2025</div>
+    <h1 class="hero-title">Building a<br><em>Community-First</em><br>Digital Presence</h1>
+    <p class="hero-sub">A 90-Day Social Media Strategy for GreekTown on the Danforth BIA<br>Instagram · Facebook · TikTok</p>
+    <div class="hero-pills">
+      <span class="pill">🇬🇷 Cultural Storytelling</span>
+      <span class="pill">📸 Content Creation</span>
+      <span class="pill">📊 Data-Driven Growth</span>
+      <span class="pill">🤝 Community Building</span>
+    </div>
+  </div>
+  <div class="hero-scroll">↓ &nbsp; scroll</div>
+</section>
+
+<!-- SLIDE 2: BRAND VOICE -->
+<section class="slide" id="slide2">
+  <div class="brand-grid">
+    <div class="brand-left">
+      <div class="section-eyebrow reveal">Brand Foundation</div>
+      <h2 class="section-title reveal">Our Voice &<br>Tone</h2>
+      <div class="voice-items reveal-parent">
+        <div class="voice-item reveal"><div class="voice-icon">🫶</div><div class="voice-text"><h4>Warm & Welcoming</h4><p>Every post feels like an invitation — to visit, to taste, to belong.</p></div></div>
+        <div class="voice-item reveal"><div class="voice-icon">🏛️</div><div class="voice-text"><h4>Culturally Proud</h4><p>Bilingual captions, heritage celebrations, and content that honours the neighbourhood's identity.</p></div></div>
+        <div class="voice-item reveal"><div class="voice-icon">🛍️</div><div class="voice-text"><h4>Locally Rooted</h4><p>Every piece of content serves member businesses. Real faces, real stories, real Danforth life.</p></div></div>
+        <div class="voice-item reveal"><div class="voice-icon">✨</div><div class="voice-text"><h4>Celebratory Energy</h4><p>We amplify joy — patios opening, new businesses, community milestones, everyday magic.</p></div></div>
+      </div>
+    </div>
+    <div class="brand-right">
+      <div class="section-eyebrow">Content Framework</div>
+      <h2 class="section-title">5 Content<br>Pillars</h2>
+      <div class="pillars-grid reveal-parent">
+        <div class="pillar-card reveal"><div class="pillar-emoji">🎉</div><h4>Events & Activations</h4><p>Countdown content, day-of coverage, Reel recaps for all BIA events</p></div>
+        <div class="pillar-card reveal"><div class="pillar-emoji">🍽️</div><h4>Food & Dining</h4><p>Restaurant features, dish spotlights, patio season content, Greek cuisine stories</p></div>
+        <div class="pillar-card reveal"><div class="pillar-emoji">🏪</div><h4>Neighbour Spotlight</h4><p>Weekly member business features — owner stories, behind-the-scenes, local love</p></div>
+        <div class="pillar-card reveal"><div class="pillar-emoji">🇬🇷</div><h4>Culture & Heritage</h4><p>Greek traditions, bilingual storytelling, community pride, historic moments</p></div>
+        <div class="pillar-card reveal" style="grid-column:1/-1"><div class="pillar-emoji">📸</div><h4>Community & UGC</h4><p>Visitor reshares with #GreektownTO, neighbourhood life, street photography, community moments.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 3: CONTENT PILLARS
+     IMAGES TO REPLACE (4 banner images):
+       img-reels   → street/video energy photo
+       img-food    → food/restaurant photo
+       img-events  → winter lights / event photo
+       img-biz     → community/people photo
+     Put your image files in the same folder as this HTML file
+     and update the src attributes below.
+════════════════════════════════════════ -->
+<section class="slide" id="slide3">
+  <div style="padding:80px 50px;">
+    <div class="s3-header reveal">
+      <div class="section-eyebrow">Content Execution</div>
+      <h2 class="section-title" style="color:#fff;">What We'll Create</h2>
+      <p>Platform-native content designed for reach, saves, and community engagement</p>
+    </div>
+    <div class="pillars-row reveal-parent">
+
+      <div class="big-pillar reveal">
+        <div class="pillar-banner pb-reels">
+          <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="reels-photo.jpg" ▼▼▼ -->
+          <img class="banner-img" src="" alt="Reels & Video" onerror="this.style.display='none'" />
+          <div class="pillar-banner-icon">🎬</div>
+          <div class="pillar-banner-label">Reels & Video</div>
+        </div>
+        <div class="pillar-body"><h3>Reels &<br>Short Video</h3><p>Walk-throughs, food reveals, patio vibes, event energy. Highest organic reach on Instagram.</p><div class="pillar-tags"><span class="ptag">3–4×/week</span><span class="ptag">15–30 sec</span><span class="ptag">IG + TikTok</span></div></div>
+      </div>
+
+      <div class="big-pillar reveal">
+        <div class="pillar-banner pb-food">
+          <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="food-photo.jpg" ▼▼▼ -->
+          <img class="banner-img" src="" alt="Food & Restaurant" onerror="this.style.display='none'" />
+          <div class="pillar-banner-icon">🍽️</div>
+          <div class="pillar-banner-label">Food & Dining</div>
+        </div>
+        <div class="pillar-body"><h3>Food &<br>Restaurant</h3><p>Dish reveals, chef features, "best of" carousels. High save rate = extended reach.</p><div class="pillar-tags"><span class="ptag">2×/week</span><span class="ptag">Carousel</span><span class="ptag">Stories</span></div></div>
+      </div>
+
+      <div class="big-pillar reveal">
+        <div class="pillar-banner pb-events">
+          <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="events-photo.jpg" ▼▼▼ -->
+          <img class="banner-img" src="" alt="Events & Moments" onerror="this.style.display='none'" />
+          <div class="pillar-banner-icon">🎊</div>
+          <div class="pillar-banner-label">Events & Moments</div>
+        </div>
+        <div class="pillar-body"><h3>Events &<br>Moments</h3><p>Live coverage, countdown graphics, recap Reels. Fire & Ice, Taste of the Danforth, seasonal activations.</p><div class="pillar-tags"><span class="ptag">Event-based</span><span class="ptag">Stories Live</span><span class="ptag">Recap Reel</span></div></div>
+      </div>
+
+      <div class="big-pillar reveal">
+        <div class="pillar-banner pb-biz">
+          <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="business-photo.jpg" ▼▼▼ -->
+          <img class="banner-img" src="" alt="Business Spotlights" onerror="this.style.display='none'" />
+          <div class="pillar-banner-icon">🏪</div>
+          <div class="pillar-banner-label">Business Spotlights</div>
+        </div>
+        <div class="pillar-body"><h3>Business<br>Spotlights</h3><p>Owner portraits, shop tours, "why I love the Danforth" stories. Members reshare to their own followers.</p><div class="pillar-tags"><span class="ptag">1×/week</span><span class="ptag">IG + FB</span><span class="ptag">UGC Boost</span></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: CALENDAR -->
+<section class="slide" id="slide4">
+  <div style="padding:70px 44px;">
+    <div class="cal-header reveal">
+      <div class="section-eyebrow">Planning & Scheduling</div>
+      <h2 class="section-title">Sample Weekly Calendar</h2>
+    </div>
+    <div class="week-grid">
+      <div><div class="day-header">Mon</div>
+        <div class="day-card feature"><div class="card-type feature">Spotlight</div><h5>Neighbour Feature</h5><p>Local business owner story — photo carousel + caption</p></div>
+        <div class="day-card story"><div class="card-type story">Story</div><h5>Poll: Favourite Greek dish?</h5><p>Community engagement Story poll</p></div>
+      </div>
+      <div><div class="day-header">Tue</div>
+        <div class="day-card reel"><div class="card-type reel">Reel</div><h5>"A Day on the Danforth"</h5><p>Morning coffee → lunch patio → evening dining walk-through Reel</p></div>
+      </div>
+      <div><div class="day-header">Wed</div>
+        <div class="day-card feature"><div class="card-type feature">Food</div><h5>Dish of the Week</h5><p>Restaurant tag + mouthwatering close-up.</p></div>
+        <div class="day-card story"><div class="card-type story">Story</div><h5>Behind the Scenes</h5><p>Kitchen or shop floor Stories</p></div>
+      </div>
+      <div><div class="day-header">Thu</div>
+        <div class="day-card ugc"><div class="card-type ugc">UGC</div><h5>#GreektownTO Repost</h5><p>Best visitor photo from the week, shared with credit</p></div>
+      </div>
+      <div><div class="day-header">Fri</div>
+        <div class="day-card reel"><div class="card-type reel">Reel</div><h5>"Weekend on the Danforth"</h5><p>Patio energy, what's on, weekend vibes teaser</p></div>
+        <div class="day-card story"><div class="card-type story">Story</div><h5>Weekend Guide</h5><p>Swipe-up events + restaurant recs</p></div>
+      </div>
+      <div><div class="day-header">Sat</div>
+        <div class="day-card event"><div class="card-type event">Event</div><h5>Live Coverage</h5><p>Stories from the strip — real-time community content</p></div>
+      </div>
+      <div><div class="day-header">Sun</div>
+        <div class="day-card feature"><div class="card-type feature">Culture</div><h5>Greek Heritage Moment</h5><p>Bilingual post — tradition, history, or community milestone</p></div>
+        <div class="day-card off"></div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#E74C3C"></div>Event Coverage</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#8E44AD"></div>Reels / Video</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>Feature / Food</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#27AE60"></div>Stories</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2980B9"></div>UGC Reshare</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SLIDE 5: CAMPAIGNS
+     IMAGES TO REPLACE (3 campaign photos):
+       img-patio     → patio/restaurant photo  (Santorini patio)
+       img-community → community/people photo
+       img-taste     → street dancing/crowd photo
+     Put your image files in the same folder and update src below.
+════════════════════════════════════════ -->
+<section class="slide" id="slide5">
+  <div style="padding:80px 60px;">
+    <div class="s5-header reveal">
+      <div class="section-eyebrow">Hero Campaigns</div>
+      <h2 class="section-title">Signature Content Campaigns</h2>
+    </div>
+    <div class="campaigns-grid reveal-parent">
+
+      <div class="campaign-card cc-spring reveal">
+        <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="patio.jpg" ▼▼▼ -->
+        <img class="cc-img" src="one.png" alt="Patio Season" onerror="this.style.display='none'" />
+        <div class="campaign-overlay"></div>
+        <div class="campaign-content">
+          <span class="campaign-badge">🌿 Spring Launch</span>
+          <h3>Patio Season is Coming</h3>
+          <p>A multi-week countdown across Stories, Reels, and a collaborative "Patio Guide" tagging every member restaurant. Drives shares and foot traffic.</p>
+          <div class="campaign-meta"><span class="cmeta">📅 March–April</span><span class="cmeta">📱 IG + FB</span><span class="cmeta">🎯 Reach + Saves</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card cc-spot reveal">
+        <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="community.jpg" ▼▼▼ -->
+        <img class="cc-img" src="two.png" alt="Neighbour Spotlight" onerror="this.style.display='none'" />
+        <div class="campaign-overlay"></div>
+        <div class="campaign-content">
+          <span class="campaign-badge">🏪 Weekly Series</span>
+          <h3>Neighbour Spotlight</h3>
+          <p>Every week, one local owner. Their story, their passion, their pick from a neighbouring shop. Members reshare — amplifying reach organically.</p>
+          <div class="campaign-meta"><span class="cmeta">📅 Ongoing</span><span class="cmeta">🎯 Engagement</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card cc-summer reveal">
+        <!-- ▼▼▼ REPLACE src WITH YOUR IMAGE e.g. src="taste-danforth.jpg" ▼▼▼ -->
+        <img class="cc-img" src="three.png" alt="Taste of the Danforth" onerror="this.style.display='none'" />
+        <div class="campaign-overlay"></div>
+        <div class="campaign-content">
+          <span class="campaign-badge">🎊 Summer 2025</span>
+          <h3>Taste of the Danforth Buzz</h3>
+          <p>Build massive anticipation with throwbacks, community polls, and "bring it back" content. The conversation drives engagement.</p>
+          <div class="campaign-meta"><span class="cmeta">📅 May–Aug</span><span class="cmeta">🎯 Community</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card cc-gems reveal">
+        <img class="cc-img" src="five.png" alt="Taste of the Danforth" onerror="this.style.display='none'" />
+        <div class="cc-deco" style="width:200px;height:200px;top:-50px;left:-50px;"></div>
+        <div class="cc-deco" style="width:100px;height:100px;bottom:40px;right:-20px;"></div>
+        <div class="campaign-overlay"></div>
+        <div class="campaign-content">
+          <span class="campaign-badge">🗺️ Discovery Series</span>
+          <h3>Hidden Gems of the Danforth</h3>
+          <p>A weekly series spotlighting lesser-known shops and dishes locals love but visitors miss. Ends with "Tag a friend who needs to know." Drives discovery and new foot traffic.</p>
+          <div class="campaign-meta"><span class="cmeta">📅 Weekly</span><span class="cmeta">📱 IG + TikTok</span><span class="cmeta">🎯 Shares</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card cc-week reveal" style="grid-column: span 2;">
+        <div class="cc-deco" style="width:250px;height:250px;top:-70px;right:-70px;"></div>
+        <div class="cc-deco" style="width:130px;height:130px;bottom:60px;left:-30px;"></div>
+        <div class="campaign-overlay"></div>
+        <div class="campaign-content">
+          <span class="campaign-badge">📅 Weekly Anchor Post</span>
+          <h3>This Week on the Danforth</h3>
+          <p>Every Monday morning, a beautifully designed carousel drops — rounding up the week's events, restaurant specials, new arrivals, and things to do. Positions the account as the #1 go-to neighbourhood guide. High saves, high return visits.</p>
+          <div class="campaign-meta"><span class="cmeta">📅 Every Monday</span><span class="cmeta">📱 IG + FB</span><span class="cmeta">🎯 Saves + Return Visits</span><span class="cmeta">🗓️ Carousel Format</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: TIMELINE -->
+<section class="slide" id="slide6">
+  <div style="padding:80px 60px;">
+    <div class="tl-header reveal">
+      <div class="section-eyebrow">Roadmap</div>
+      <h2 class="section-title">90-Day Action Plan</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-bar"></div>
+      <div class="timeline-phases">
+        <div class="tphase reveal">
+          <div class="tphase-dot">1</div>
+          <div class="tphase-range">Days 1–30</div>
+          <h3>Listen & Learn</h3>
+          <div class="tphase-items">
+            <div class="titem"><div class="titem-icon">🔍</div><p><strong>Full content audit</strong> — last 90 days of posts, performance, gaps</p></div>
+            <div class="titem"><div class="titem-icon">🚶</div><p><strong>Walk the Danforth</strong> — meet owners, photograph the strip, feel the community</p></div>
+            <div class="titem"><div class="titem-icon">📅</div><p><strong>Build Month 1 calendar</strong> — systems, scheduling, reporting templates</p></div>
+            <div class="titem"><div class="titem-icon">📊</div><p><strong>Baseline metrics report</strong> — documented benchmark for growth tracking</p></div>
+          </div>
+        </div>
+        <div class="tphase reveal">
+          <div class="tphase-dot">2</div>
+          <div class="tphase-range">Days 31–60</div>
+          <h3>Build & Activate</h3>
+          <div class="tphase-items">
+            <div class="titem"><div class="titem-icon">🎬</div><p><strong>Launch 3 content pillars</strong> — Neighbour Spotlight, Day on Danforth, Cultural Moments</p></div>
+            <div class="titem"><div class="titem-icon">🌿</div><p><strong>Patio Season campaign</strong> — countdown, collaborative guide, UGC push</p></div>
+            <div class="titem"><div class="titem-icon">📸</div><p><strong>#GreektownTO launch</strong> — UGC reshare program, Stories daily</p></div>
+            <div class="titem"><div class="titem-icon">🤝</div><p><strong>Influencer outreach</strong> — 3–5 Toronto food creators for organic collabs</p></div>
+          </div>
+        </div>
+        <div class="tphase reveal">
+          <div class="tphase-dot">3</div>
+          <div class="tphase-range">Days 61–90</div>
+          <h3>Grow & Optimize</h3>
+          <div class="tphase-items">
+            <div class="titem"><div class="titem-icon">📱</div><p><strong>TikTok pilot</strong> — repurpose top Reels, test neighbourhood walk format</p></div>
+            <div class="titem"><div class="titem-icon">🎊</div><p><strong>Event marketing</strong> — full digital campaign for Q2 BIA activations</p></div>
+            <div class="titem"><div class="titem-icon">📈</div><p><strong>90-day performance report</strong> — reach, engagement, growth, top content analysis</p></div>
+            <div class="titem"><div class="titem-icon">🗺️</div><p><strong>Q3 strategy presented</strong> — summer roadmap with data-backed recommendations</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: METRICS -->
+<section class="slide" id="slide7">
+  <div style="padding:80px 60px;">
+    <div class="m-header reveal">
+      <div class="section-eyebrow">Measurement & Reporting</div>
+      <h2 class="section-title">How We'll Measure Success</h2>
+    </div>
+    <div class="metrics-grid reveal-parent">
+      <div class="metric-card reveal"><div class="metric-icon">👁️</div><div class="metric-number">Reach</div><div class="metric-label">Awareness Metric</div><div class="metric-desc">Monthly reach + impressions track how far GreekTown's message travels beyond current followers</div></div>
+      <div class="metric-card reveal"><div class="metric-icon">💬</div><div class="metric-number">Engagement</div><div class="metric-label">Content Quality</div><div class="metric-desc">Likes, saves, comments & shares per post. Saves = highest signal of valuable content on Instagram</div></div>
+      <div class="metric-card reveal"><div class="metric-icon">📈</div><div class="metric-number">Growth</div><div class="metric-label">Brand Health</div><div class="metric-desc">Follower growth rate month-over-month, plus audience quality (Toronto locals vs. bots)</div></div>
+      <div class="metric-card reveal"><div class="metric-icon">🔁</div><div class="metric-number">Shares</div><div class="metric-label">Amplification</div><div class="metric-desc">How often member businesses and community reshare — organic amplification is free reach</div></div>
+      <div class="metric-card reveal"><div class="metric-icon">📍</div><div class="metric-number">Foot Traffic</div><div class="metric-label">Business Impact</div><div class="metric-desc">Qualitative feedback from member businesses correlating social campaigns to in-store visits</div></div>
+      <div class="metric-card reveal"><div class="metric-icon">📋</div><div class="metric-number">Monthly Report</div><div class="metric-label">Accountability</div><div class="metric-desc">Full performance report to BIA team every month — transparent, data-driven, actionable insights</div></div>
+    </div>
+    <div class="tools-row reveal">
+      <span class="tools-label">Tools</span>
+      <span class="tool-badge">📊 Meta Business Suite</span>
+      <span class="tool-badge">📅 Later / Buffer</span>
+      <span class="tool-badge">🎨 Canva Pro</span>
+      <span class="tool-badge">📱 CapCut</span>
+      <span class="tool-badge">🔍 Instagram Insights</span>
+      <span class="tool-badge">📈 TikTok Analytics</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: CLOSE -->
+<section class="slide" id="slide8">
+  <div class="hero-pattern"></div>
+  <div class="close-glow"></div>
+  <div class="close-content">
+    <div class="close-orn">☿</div>
+    <h2 class="close-title">GreekTown deserves<br>a <em>digital home</em> as<br>vibrant as its streets.</h2>
+    <p class="close-sub">I'm ready to show up every day — with camera, creativity, and genuine love for this community — to build that presence together.</p>
+    <button class="close-cta" onclick="document.getElementById('slide1').scrollIntoView({behavior:'smooth'})">Let's Build It Together</button>
+  </div>
+</section>
+
+<script>
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.nav-dot');
+const dio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const i = Array.from(slides).indexOf(e.target);
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[i]) dots[i].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => dio.observe(s));
+</script>
+</body>
+</html>
